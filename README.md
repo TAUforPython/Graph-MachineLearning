@@ -15,3 +15,6 @@ Formal Definition: For the GW distance of order 2 (GW²), it's defined as the in
 Poincaré Ball = Warped space inside a circle
 Distance Stretching = Exponential growth near edges
 Hierarchy = Center = parents, Edge = leaves
+
+
+The hyperbolic space automatically organizes your spatial data into a hierarchical structure that makes classification easier!
