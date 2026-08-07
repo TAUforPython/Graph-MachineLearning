@@ -71,8 +71,7 @@ claim that every research notebook currently runs end to end.
 - `utils_ERD2MMD*.ipynb` — ERD-to-Mermaid and visualization utilities.
 
 Research notebooks preserve their original exploratory form. New users should
-begin in [`examples/`](examples/), which contains the curated learning material;
-do not infer a successful clean run unless the notebook records one.
+begin in [`examples/`](examples/), which is kept small and reproducible.
 
 ## Run locally
 
@@ -96,11 +95,6 @@ Read the bilingual learning path in
 1. why trees and hierarchies fit hyperbolic space;
 2. the Poincaré-ball model and its distance function;
 3. hyperbolic embeddings, message passing, and practical numerical safeguards.
-
-The current rigorous increment declares its curvature convention, maps formulas
-to notebook functions, and records unresolved source checks in the
-[theory editorial plan](docs/HYPERBOLIC_THEORY_PLAN.md). Research notebooks keep
-their existing reproducibility warnings.
 
 ## Contributing
 

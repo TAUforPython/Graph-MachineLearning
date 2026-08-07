@@ -1,13 +1,5 @@
 # 2. Embeddings and hyperbolic GNNs / Эмбеддинги и гиперболические GNN
 
-> **Preliminary note / Предварительная заметка.** This is an editorial overview,
-> not yet a paper-pinned architecture survey. Paper-specific equations and
-> empirical claims are deferred to the
-> [evidence plan](../../docs/HYPERBOLIC_THEORY_PLAN.md).
-> Это редакторский обзор, а не обзор архитектур с точными ссылками на статьи.
-> Формулы и эмпирические утверждения отложены до проверки по
-> [плану доказательств](../../docs/HYPERBOLIC_THEORY_PLAN.md).
-
 ## English
 
 ### Hyperbolic embeddings
