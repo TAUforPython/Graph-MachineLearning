@@ -29,6 +29,160 @@ Assumptions:
 6. a graph is useful only if it beats feature-matched baselines and perturbation
    controls under the same leakage-safe protocol.
 
+## User guide: how it works
+
+### What you do
+
+1. **Choose an example.** Start with the MI notebook. It is the shortest path
+   through patient splitting, graph construction, model training, and reporting.
+   The PTB-XL, MIMIC, and brain notebooks demonstrate the interfaces for more
+   specialized data.
+2. **Open it in Colab.** Use a link in the table below and run the cells from top
+   to bottom. The first executable cell clones this repository and installs the
+   `healthcare_gnn` package. Core logic stays in `src/`; the notebook only selects
+   a configuration, starts a run, and displays its report.
+3. **Run synthetic smoke mode first.** It creates deterministic artificial rows,
+   splits them by synthetic patient ID, fits preprocessing on training patients,
+   builds a graph without labels, and compares logistic regression, a GCN, and a
+   Poincaré/tangent-aggregation GCN.
+4. **Read the JSON report.** Confirm `status` is
+   `synthetic_smoke_not_clinical`. Inspect the patient split, graph diagnostics,
+   validation-selected threshold, test metrics, edge-drop audit, seed, curvature,
+   configuration snapshot, and package versions.
+5. **Only then prepare real data.** Follow the relevant access policy and review
+   the target, prediction time, feature availability, patient grouping, and
+   license. The CLI intentionally refuses the example full-data configuration;
+   this prevents an unreviewed file from being mistaken for a valid experiment.
+
+### What happens inside one run
+
+```text
+configuration
+    ↓
+patient-level train / validation / test split
+    ↓
+training-only imputation and scaling
+    ↓
+label-free graph construction
+    ↓
+baseline + Euclidean GNN + geometry-aware model
+    ↓
+validation threshold / early stopping
+    ↓
+final test metrics + graph perturbation audit + JSON report
+```
+
+The logistic baseline receives the same train-fitted features as the graph
+models. During GNN optimization, only train-to-train edges are used. Validation
+data select the checkpoint and decision threshold. Test labels are used only for
+the final report. A real study still needs nested tuning, repeated seeds,
+calibration, confidence intervals, subgroup review, and an independently checked
+data dictionary.
+
+### How to interpret the comparison
+
+- **Baseline wins:** report that the graph did not add value under this setup.
+- **GNN wins:** verify the advantage survives rewired/dropped edges, shuffled
+  features, repeated seeds, and paired patient-level uncertainty estimates.
+- **Hyperbolic model wins:** additionally check parameter counts, curvature
+  sensitivity, finite gradients, radius distribution, and Euclidean controls.
+- **Smoke run wins or loses:** draw no clinical conclusion. Synthetic data only
+  verify that the software path executes.
+
+### Common user errors
+
+| Message or symptom | Meaning | Action |
+|---|---|---|
+| `Strict inductive mode refuses preprocessing fit on the full cohort` | Training rows were not declared separately. | Supply training indices; do not disable strict mode for a deployment/generalization claim. |
+| `MIMIC files are absent` | Credentialed data were not found locally. | Complete PhysioNet access and download manually; the project never requests credentials or downloads full MIMIC automatically. |
+| Colab cannot import `healthcare_gnn` | The clone/install cell did not finish or the working directory is wrong. | Re-run setup and confirm the directory is `/content/ML-MachineLearning-Graphs/healthcare-gnn-lab`. |
+| A metric is unexpectedly high | Leakage, duplicated patients, target-derived features, or graph construction may be wrong. | Stop interpretation and audit patient IDs, timestamps, feature provenance, edges, and split-specific fitting. |
+| GNN output changes between runs | Hardware or an operation may be nondeterministic. | Check the recorded versions/device, use the same seed, and repeat the full experiment over several seeds. |
+
+## Руководство пользователя
+
+### Назначение проекта
+
+`Healthcare GNN Lab` — учебная исследовательская среда для честного сравнения
+табличной модели, евклидовой графовой нейронной сети и геометрически осознанной
+модели. Проект помогает проверить, даёт ли структура графа дополнительную
+информацию. Он **не является диагностической системой**, не предлагает лечение
+и не подтверждает клиническую готовность модели.
+
+Текущий режим `synthetic` использует только искусственные данные. Он проверяет
+загрузку конфигурации, разделение по пациентам, отсутствие очевидной утечки,
+построение графа, обучение и формирование отчёта. Его метрики нельзя переносить
+на UCI MI, PTB-XL, MIMIC или ABIDE.
+
+### Что делает пользователь
+
+1. **Выберите пример.** Начните с notebook для осложнений инфаркта миокарда: это
+   самый короткий полный маршрут от данных до отчёта. Notebook PTB-XL показывает
+   интерфейсы графа из 12 отведений ЭКГ, MIMIC — временные ограничения EHR, а
+   дополнительный brain-пример — прозрачную incidence-матрицу гиперграфа.
+2. **Откройте notebook в Google Colab.** Используйте ссылку в таблице ниже и
+   выполняйте ячейки сверху вниз. Первая исполняемая ячейка клонирует репозиторий
+   и устанавливает пакет `healthcare_gnn`. Основной код находится в `src/`, а не
+   скрыт в notebook.
+3. **Сначала запустите synthetic smoke mode.** Генерируются детерминированные
+   искусственные записи. Они разделяются по идентификатору пациента. Imputer и
+   scaler обучаются только на train. Рёбра строятся из признаков без меток.
+4. **Проверьте JSON-отчёт.** Поле `status` должно быть равно
+   `synthetic_smoke_not_clinical`. Просмотрите размеры train/validation/test,
+   свойства графа, порог, выбранный на validation, метрики test, edge-drop audit,
+   seed, кривизну, снимок конфигурации и версии пакетов.
+5. **Только после этого готовьте реальные данные.** Проверьте лицензию, момент
+   прогноза, целевую переменную, доступность каждого признака к этому моменту и
+   группировку записей одного пациента. Пример full-конфигурации специально не
+   запускается автоматически: сначала нужен независимый аудит данных.
+
+### Что происходит внутри запуска
+
+```text
+конфигурация
+    ↓
+разделение train / validation / test по пациентам
+    ↓
+imputation и scaling только по train
+    ↓
+построение графа без использования меток
+    ↓
+baseline + евклидова GNN + geometry-aware модель
+    ↓
+выбор checkpoint и порога по validation
+    ↓
+финальные test-метрики + perturbation audit + JSON-отчёт
+```
+
+Logistic regression получает те же признаки, преобразованные только по train,
+что и графовые модели. При оптимизации GNN используются только рёбра между
+train-вершинами. Validation выбирает checkpoint и порог решения. Test-метки
+используются только для финального отчёта. Для полноценного исследования всё
+равно нужны nested tuning, несколько seed, калибровка, доверительные интервалы,
+анализ подгрупп и проверенный словарь данных.
+
+### Как понимать результат
+
+- **Baseline лучше:** прямо сообщите, что при данном протоколе граф не помог.
+- **GNN лучше:** проверьте, сохраняется ли эффект после rewiring/edge dropping,
+  перемешивания признаков, повторов с разными seed и парного bootstrap по
+  пациентам.
+- **Гиперболическая модель лучше:** дополнительно сравните число параметров,
+  чувствительность к кривизне, устойчивость градиентов, распределение радиусов и
+  евклидовы контрольные модели.
+- **Результат smoke run:** не делайте медицинских выводов независимо от значения
+  метрик. Искусственные данные проверяют только программный pipeline.
+
+### Типичные ошибки
+
+| Сообщение или симптом | Что это означает | Действие |
+|---|---|---|
+| `Strict inductive mode refuses preprocessing fit on the full cohort` | Не выделены строки train. | Передайте train-индексы; не отключайте strict mode для оценки обобщения. |
+| `MIMIC files are absent` | Локальные credentialed-файлы не найдены. | Получите разрешение PhysioNet и загрузите их вручную. Проект не загружает full MIMIC автоматически. |
+| Colab не импортирует `healthcare_gnn` | Не завершилась установка или выбрана неверная папка. | Повторите setup и проверьте путь `/content/ML-MachineLearning-Graphs/healthcare-gnn-lab`. |
+| Метрика подозрительно высокая | Возможна утечка, дубликаты пациентов или target-derived признаки. | Остановите интерпретацию и проверьте ID, время, происхождение признаков, рёбра и fitting по split. |
+| Результат GNN меняется | Возможна недетерминированная операция или другое окружение. | Сравните версии и устройство из отчёта, зафиксируйте seed и повторите эксперимент с несколькими seed. |
+
 ## Install and run
 
 ```bash
