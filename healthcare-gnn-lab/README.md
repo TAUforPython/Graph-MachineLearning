@@ -1,7 +1,5 @@
 # Healthcare GNN Lab
 
-**English** | [Русский](#руководство-пользователя)
-
 A leakage-aware **educational research scaffold** for testing whether graph
 structure or non-Euclidean geometry adds value beyond strong non-graph baselines.
 It is not a diagnostic system and is not clinically validated.
