@@ -35,6 +35,12 @@ and deterministic executable cells.
 
 ## Notebook catalogue
 
+The root contains 15 legacy research notebooks. See the
+**[full notebook review and classification](docs/NOTEBOOK_REVIEW.md)** for a
+file-by-file reproducibility assessment, detected blockers, maturity labels,
+and recommended migration order. The short list below is navigation, not a
+claim that every research notebook currently runs end to end.
+
 ### Hyperbolic learning
 
 - `Poincare ball for Graph.ipynb` — visual intuition for graph layouts in the
@@ -91,6 +97,7 @@ Read the bilingual learning path in
 ## Contributing
 
 When adding a notebook:
+
 
 1. use a descriptive `snake_case.ipynb` filename;
 2. include objectives, prerequisites, and an **Open in Colab** badge;
