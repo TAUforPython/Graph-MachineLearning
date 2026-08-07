@@ -98,6 +98,7 @@ Read the bilingual learning path in
 
 When adding a notebook:
 
+
 1. use a descriptive `snake_case.ipynb` filename;
 2. include objectives, prerequisites, and an **Open in Colab** badge;
 3. install non-Colab dependencies in the first executable cell;
