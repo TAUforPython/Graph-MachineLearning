@@ -1,0 +1,1 @@
+{"example":"brain","mode":"synthetic","seed":41,"n_samples":120,"n_features":18,"k":4,"epochs":6,"models":["logistic","gcn","hyperbolic_gcn"],"strict_inductive":true}
