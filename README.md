@@ -1,20 +1,105 @@
-# Graph-MachineLearning
-Graph all around the world
+# Graph Machine Learning
 
+Practical notebooks for graph visualization, graph neural networks (GNNs),
+Gromov–Wasserstein methods, and hyperbolic graph learning.
 
-Understanding the Concept
+> **Languages:** the project navigation is in English. The hyperbolic-graph
+> notes are bilingual (English + Русский).
 
-Metric Measure Spaces: The GW distance compares two metric measure spaces, (X₁, d₁, μ₁) and (X₂, d₂, μ₂), where d is a distance function and μ is a probability measure on the space. 
+## Start here
 
-Core Idea: The GW distance is the minimum cost of matching points from the two spaces such that the internal structure (distances) of the spaces is preserved as much as possible. 
+The notebooks run in a browser with Google Colab; no local installation is
+needed. Open an example, then select **Runtime → Run all**.
 
-Formal Definition: For the GW distance of order 2 (GW²), it's defined as the infimum over all measure couplings (γ) of the integral of |d₁(x, x') - d₂(y, y')|². 
+| Beginner example | What it demonstrates | Colab |
+|---|---|---|
+| Graph learning basics | Build, inspect, and visualize a graph | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TAUforPython/Graph-MachineLearning/blob/main/examples/graph_learning_basics.ipynb) |
+| Hyperbolic graph basics | Poincaré-ball distances and a tree embedding | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TAUforPython/Graph-MachineLearning/blob/main/examples/hyperbolic_graph_basics.ipynb) |
 
+Each example contains its own Colab badge, learning objectives, explanations,
+and deterministic executable cells.
 
+## Repository map
 
-Poincaré Ball = Warped space inside a circle
-Distance Stretching = Exponential growth near edges
-Hierarchy = Center = parents, Edge = leaves
+```text
+.
+├── examples/             # Small, documented, Colab-ready starting points
+├── theory/hyperbolic-graphs/
+│   ├── README.md         # Bilingual theory index
+│   ├── 01-foundations.md # Geometry and the Poincaré ball
+│   └── 02-learning.md    # Embeddings and hyperbolic GNNs
+├── datasets/             # Small data files used by selected notebooks
+├── *.ipynb               # Research and experimental notebooks
+└── REPOSITORY_PROMPT.md  # Reusable prompt for future repository cleanup
+```
 
+## Notebook catalogue
 
-The hyperbolic space automatically organizes your spatial data into a hierarchical structure that makes classification easier!
+### Hyperbolic learning
+
+- `Poincare ball for Graph.ipynb` — visual intuition for graph layouts in the
+  Poincaré ball.
+- `Hyperbolic Graph Neural Network.ipynb` — a hyperbolic GNN experiment.
+- `Hyperbolic GNN for genomic data.ipynb` — hyperbolic learning on genomic
+  features.
+
+### Graph neural networks and visualization
+
+- `GCN genom classification.ipynb` — population classification with a GCN.
+- `example Gated Graph Attention Network.ipynb` — gated graph attention.
+- `example_Interactive_Graph_Visualisation.ipynb` — interactive graph display.
+- `Graph from DataFrame tSNE.ipynb` — graph construction from tabular data.
+- `LLM Graph triplets visualisation.ipynb` — visualization of extracted
+  knowledge-graph triplets.
+
+### Distances, clustering, and utilities
+
+- `Gromov-Wasserstein distance Transport Task.ipynb` — optimal-transport
+  distance between structured datasets.
+- `Gromov-Waserstein graph clastering.ipynb` — graph clustering with GW ideas.
+- `AGC - agglomerative clustering medical image.ipynb` — image clustering.
+- `ML task table PCA ICA tSNE DBSCAN AggClustering SVM.ipynb` — a broad
+  comparison of classical methods.
+- `utils_ERD2MMD*.ipynb` — ERD-to-Mermaid and visualization utilities.
+
+Research notebooks preserve their original exploratory form. New users should
+begin in [`examples/`](examples/), which is kept small and reproducible.
+
+## Run locally
+
+```bash
+git clone https://github.com/TAUforPython/Graph-MachineLearning.git
+cd Graph-MachineLearning
+python -m venv .venv
+source .venv/bin/activate      # Windows: .venv\Scripts\activate
+python -m pip install jupyter numpy matplotlib networkx
+jupyter lab
+```
+
+Package requirements differ between research notebooks. Read their first cells
+before running them; Colab installation cells are notebook-specific.
+
+## Hyperbolic graph theory / Теория гиперболических графов
+
+Read the bilingual learning path in
+[`theory/hyperbolic-graphs/`](theory/hyperbolic-graphs/README.md). It covers:
+
+1. why trees and hierarchies fit hyperbolic space;
+2. the Poincaré-ball model and its distance function;
+3. hyperbolic embeddings, message passing, and practical numerical safeguards.
+
+## Contributing
+
+When adding a notebook:
+
+1. use a descriptive `snake_case.ipynb` filename;
+2. include objectives, prerequisites, and an **Open in Colab** badge;
+3. install non-Colab dependencies in the first executable cell;
+4. set random seeds and avoid machine-specific paths;
+5. keep downloaded data small and use stable HTTPS URLs;
+6. restart the runtime and verify **Run all** before committing;
+7. clear accidental secrets and unnecessarily large cell outputs.
+
+## License
+
+This repository is distributed under the terms in [`LICENSE`](LICENSE).
