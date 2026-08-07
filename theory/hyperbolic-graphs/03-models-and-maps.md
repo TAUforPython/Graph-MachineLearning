@@ -1,12 +1,219 @@
 # 3. Poincaré model and maps / Модель Пуанкаре и отображения
 
-> **Epistemic status / Эпистемический статус.** Formulas in this first increment
-> are an **editorial synthesis** under the declared convention and are checked by
-> deterministic notebook tests. Paper equation locators await PDF inspection;
-> see the [evidence matrix](../../docs/HYPERBOLIC_THEORY_PLAN.md). They are not
-> presented as newly derived repository results.
 
-## English
+Возьмём небольшое бинарное дерево из семи вершин:
+
+```text
+        root
+       /    \
+      A      B
+     / \    / \
+   A1  A2  B1  B2
+```
+
+Или в виде иерархии:
+
+```text
+root -> {A, B} -> {A1, A2, B1, B2}
+```
+
+В гиперболическом шаре Пуанкаре такое дерево удобно раскладывать так:
+
+- корень находится ближе к центру;
+- вершины уровня `A`, `B` находятся дальше от центра;
+- листья `A1`, `A2`, `B1`, `B2` находятся ещё ближе к границе.
+
+
+> Чем глубже уровень иерархии, тем больше места ему нужно. В гиперболическом пространстве около границы становится всё больше «углового» места, поэтому ветви можно разводить в разные стороны.
+
+- визуально граница диска кажется близкой;
+- но гиперболическое расстояние до границы бесконечно.
+
+
+Шар Пуанкаре кривизны `-c` определяется так:
+
+```math
+\mathbb D_c^n
+=
+\left\{
+x \in \mathbb R^n :
+c\lVert x\rVert^2 < 1
+\right\}.
+```
+
+Это значит, что допустимые точки находятся внутри шара радиуса:
+
+```math
+\frac{1}{\sqrt c}.
+```
+
+То есть если `c = 1`, радиус равен `1`.
+
+Если `c = 4`, радиус равен:
+
+```math
+\frac{1}{2}.
+```
+
+Если `c = 0.25`, радиус равен:
+
+```math
+2.
+```
+
+Сама граница:
+
+```text
+c||x||^2 = 1
+```
+
+в многообразие не входит. Это бесконечно удалённая область.
+
+
+## Расстояние между двумя точками
+
+Для точек `u`, `v` внутри шара расстояние равно:
+
+```math
+d_c(u,v)
+=
+\frac{1}{\sqrt c}
+\mathrm{arcosh}
+\left(
+1+
+\frac{
+2c\lVert u-v\rVert^2
+}{
+(1-c\lVert u\rVert^2)
+(1-c\lVert v\rVert^2)
+}
+\right).
+```
+
+Здесь важно:
+
+- `u` и `v` должны быть строго внутри шара;
+- знаменатели положительны только если:
+
+```math
+c\lVert u\rVert^2 < 1,
+\qquad
+c\lVert v\rVert^2 < 1.
+```
+
+# 3. Сложение Мёбиуса и геодезические координаты 
+
+В обычном евклидовом пространстве мы можем просто складывать векторы:
+
+```text
+x + y
+```
+
+Но в гиперболическом шаре обычное сложение не сохраняет нужную геометрию. Поэтому используют специальные операции.
+
+---
+
+## Сложение Мёбиуса
+
+Для внутренних точек `u`, `v` определяется операция:
+
+```math
+u \oplus_c v
+=
+\frac{
+(1+2c\langle u,v\rangle+c\lVert v\rVert^2)u
++
+(1-c\lVert u\rVert^2)v
+}{
+1+2c\langle u,v\rangle+c^2\lVert u\rVert^2\lVert v\rVert^2
+}.
+```
+
+Это не обычное сложение векторов. Это специальная операция, согласованная с геометрией шара Пуанкаре.
+
+## Скалярное умножение Мёбиуса
+
+Для точки `x` и вещественного числа `t` определяется:
+
+```math
+t \otimes_c x
+=
+\frac{
+\tanh
+\left(
+t\mathrm{artanh}(\sqrt c\lVert x\rVert)
+\right)
+}{
+\sqrt c\lVert x\rVert
+}
+x,
+```
+
+при:
+
+```math
+x \ne 0.
+```
+
+Для нуля отдельно полагают:
+
+```math
+t \otimes_c 0 = 0.
+```
+
+- обычное умножение вектора на число двигает точку вдоль прямой;
+- `t ⊗_c x` делает аналогичное движение, но уже вдоль гиперболического луча.
+
+---
+
+## Геодезическая линия между двумя точками
+
+Геодезическая линия — это аналог прямой линии в искривлённом пространстве.
+
+Отрезок геодезической от `u` к `v` можно параметризовать так:
+
+```math
+\gamma_{u\to v}(t)
+=
+u
+\oplus_c
+\left(
+t \otimes_c
+\left(
+(-u)\oplus_c v
+\right)
+\right),
+```
+
+где:
+
+```math
+0 \le t \le 1.
+```
+
+При этом:
+
+```math
+\gamma(0) = u,
+```
+
+```math
+\gamma(1) = v.
+```
+
+То есть параметр `t` плавно ведёт от начальной точки к конечной.
+
+В модели Пуанкаре геодезические линии обычно выглядят не как прямые отрезки, а как дуги окружностей, которые пересекают границу диска под прямым углом.
+
+Исключение — диаметры диска.
+
+То есть:
+
+```text
+прямая линия через центр — геодезическая;
+обычная хорда, не проходящая через центр, обычно не геодезическая.
+```
+
 
 ### Intuition and tiny graph
 
@@ -35,7 +242,7 @@ Thus the coordinate radius is `1/sqrt(c)`. The boundary is not in the manifold.
 The distance is
 
 ```math
-d_c(u,v)=\frac{1}{\sqrt c}\operatorname{arcosh}\!\left(
+d_c(u,v)=\frac{1}{\sqrt c}\mathrm{arcosh}\!\left(
 1+\frac{2c\lVert u-v\rVert^2}
 {(1-c\lVert u\rVert^2)(1-c\lVert v\rVert^2)}\right).
 ```
@@ -43,7 +250,7 @@ d_c(u,v)=\frac{1}{\sqrt c}\operatorname{arcosh}\!\left(
 All denominators are positive only for interior points. At the origin,
 
 ```math
-d_c(0,x)=\frac{2}{\sqrt c}\operatorname{artanh}(\sqrt c\lVert x\rVert).
+d_c(0,x)=\frac{2}{\sqrt c}\mathrm{artanh}(\sqrt c\lVert x\rVert).
 ```
 
 This follows by substituting `u=0` and using
@@ -64,7 +271,7 @@ For `x!=0` and real `t`, Möbius scalar multiplication is
 
 ```math
 t\otimes_c x=
-\frac{\tanh\!\left(t\operatorname{artanh}(\sqrt c\lVert x\rVert)\right)}
+\frac{\tanh\!\left(t\mathrm{artanh}(\sqrt c\lVert x\rVert)\right)}
 {\sqrt c\lVert x\rVert}x,
 \qquad t\otimes_c0=0.
 ```
@@ -89,7 +296,7 @@ convention above, for nonzero inputs,
 \frac{\tanh(\sqrt c\lVert w\rVert)}{\sqrt c\lVert w\rVert}w,
 \qquad
 \log_0^c(x)=
-\frac{\operatorname{artanh}(\sqrt c\lVert x\rVert)}
+\frac{\mathrm{artanh}(\sqrt c\lVert x\rVert)}
 {\sqrt c\lVert x\rVert}x.
 ```
 
@@ -115,8 +322,7 @@ The factor `2` is not an error. A convention normalized to Euclidean metric
 5. test both ordinary and near-boundary points, preferably in `float64`.
 
 **Common misconception.** A chord in a Poincaré plot is not generally a
-geodesic. It is a geodesic only on a diameter (or after changing to Klein-model
-coordinates, where geodesics plot as chords but the metric coordinates differ).
+geodesic. It is a geodesic only on a diameter.
 
 ### Repository implementation
 
@@ -140,9 +346,8 @@ known blockers are recorded in [`docs/NOTEBOOK_REVIEW.md`](../../docs/NOTEBOOK_R
 3. **Coding exercise:** add a test that geodesic distances satisfy
    `d_c(gamma(0),gamma(t)) ~= t d_c(u,v)` at five values of `t`.
 
-## Русский
 
-### Интуиция и маленький граф
+### Вводная информация
 
 Рассмотрим бинарное дерево из семи вершин
 `root -> {A,B} -> {A1,A2,B1,B2}`. Более глубокие уровни можно разместить на
@@ -170,7 +375,7 @@ g_x^c=(\lambda_x^c)^2 I_n.
 Расстояние равно
 
 ```math
-d_c(u,v)=\frac{1}{\sqrt c}\operatorname{arcosh}\!\left(
+d_c(u,v)=\frac{1}{\sqrt c}\mathrm{arcosh}\!\left(
 1+\frac{2c\lVert u-v\rVert^2}
 {(1-c\lVert u\rVert^2)(1-c\lVert v\rVert^2)}\right).
 ```
@@ -178,7 +383,7 @@ d_c(u,v)=\frac{1}{\sqrt c}\operatorname{arcosh}\!\left(
 Все знаменатели положительны только для внутренних точек. В начале координат
 
 ```math
-d_c(0,x)=\frac{2}{\sqrt c}\operatorname{artanh}(\sqrt c\lVert x\rVert).
+d_c(0,x)=\frac{2}{\sqrt c}\mathrm{artanh}(\sqrt c\lVert x\rVert).
 ```
 
 Это следует из подстановки `u=0` и тождества
@@ -199,7 +404,7 @@ u\oplus_c v=
 
 ```math
 t\otimes_c x=
-\frac{\tanh\!\left(t\operatorname{artanh}(\sqrt c\lVert x\rVert)\right)}
+\frac{\tanh\!\left(t\mathrm{artanh}(\sqrt c\lVert x\rVert)\right)}
 {\sqrt c\lVert x\rVert}x,
 \qquad t\otimes_c0=0.
 ```
@@ -224,7 +429,7 @@ t\otimes_c x=
 \frac{\tanh(\sqrt c\lVert w\rVert)}{\sqrt c\lVert w\rVert}w,
 \qquad
 \log_0^c(x)=
-\frac{\operatorname{artanh}(\sqrt c\lVert x\rVert)}
+\frac{\mathrm{artanh}(\sqrt c\lVert x\rVert)}
 {\sqrt c\lVert x\rVert}x.
 ```
 
@@ -265,10 +470,7 @@ t\otimes_c x=
 | Exp/log в общей точке | Пример отсутствует | Запланировано |
 | Преобразования Лоренца/Клейна | Пример отсутствует | После проверки соглашений по источникам |
 
-Запустите [курируемый notebook](../../examples/hyperbolic_graph_basics.ipynb) в
-Google Colab. Три корневых гиперболических notebook остаются экспериментальными;
-их известные проблемы записаны в
-[`docs/NOTEBOOK_REVIEW.md`](../../docs/NOTEBOOK_REVIEW.md).
+
 
 ### Проверьте понимание
 
