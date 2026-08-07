@@ -1,14 +1,5 @@
 # Healthcare GNN Lab
 
-A leakage-aware **educational research scaffold** for testing whether graph
-structure or non-Euclidean geometry adds value beyond strong non-graph baselines.
-It is not a diagnostic system and is not clinically validated.
-
-> **Current increment:** the shared synthetic smoke pipeline, graph builders,
-> numerical hyperbolic layer, four Colab notebooks, and tests are implemented.
-> Real-dataset experiments have not been run. PTB-XL, MIMIC, and ABIDE need the
-> access/review steps below; their smoke reports are software checks only.
-
 ## Architecture and assumptions
 
 The `data` package owns patient splits and temporal guards. `graphs` fits
