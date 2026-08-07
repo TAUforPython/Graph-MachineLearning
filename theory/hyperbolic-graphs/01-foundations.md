@@ -23,7 +23,7 @@ For curvature `-c`, where `c > 0`, the `d`-dimensional ball is
 For the unit ball (`c = 1`), the distance between `u` and `v` is
 
 ```math
-d_{\mathbb{D}}(u,v)=\arcosh\left(
+d_{\mathbb{D}}(u,v)=\mathrn{arcosh}\left(
 1+2\frac{\lVert u-v\rVert^2}
 {(1-\lVert u\rVert^2)(1-\lVert v\rVert^2)}\right).
 ```
@@ -65,7 +65,7 @@ boundary. The boundary itself is not part of the model.
 Для единичного шара (`c = 1`) расстояние между `u` и `v` равно
 
 ```math
-d_{\mathbb{D}}(u,v)=\arcosh\left(
+d_{\mathbb{D}}(u,v)=\mathrm{arcosh}\left(
 1+2\frac{\lVert u-v\rVert^2}
 {(1-\lVert u\rVert^2)(1-\lVert v\rVert^2)}\right).
 ```
