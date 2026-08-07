@@ -1,0 +1,1 @@
+{"example":"mi","mode":"downloaded","data_root":"data/raw","seed":17,"k":5,"epochs":200,"models":["logistic","random_forest","mlp","gcn","sage","gat","transformer","hyperbolic_gcn"],"strict_inductive":true,"note":"Copy this file, verify dataset access and prediction-time columns, and tune only inside training/validation data."}
