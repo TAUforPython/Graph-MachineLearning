@@ -13,11 +13,11 @@ needed. Open an example, then select **Runtime → Run all**.
 
 | Beginner example | What it demonstrates | Colab |
 |---|---|---|
-| Graph learning basics | Build, inspect, and visualize a graph | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TAUforPython/Graph-MachineLearning/blob/main/examples/graph_learning_basics.ipynb) |
-| Hyperbolic graph basics | Poincaré-ball distances and a tree embedding | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TAUforPython/Graph-MachineLearning/blob/main/examples/hyperbolic_graph_basics.ipynb) |
+| Graph learning basics | Build, inspect, and visualize a graph | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/examples/graph_learning_basics.ipynb) |
+| Hyperbolic graph basics | Poincaré-ball distances and a tree embedding | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/examples/hyperbolic_graph_basics.ipynb) |
 
 Each example contains its own Colab badge, learning objectives, explanations,
-and deterministic executable cells.
+and deterministic checks. Verification status is stated inside each notebook.
 
 ## Repository map
 
@@ -27,7 +27,9 @@ and deterministic executable cells.
 ├── theory/hyperbolic-graphs/
 │   ├── README.md         # Bilingual theory index
 │   ├── 01-foundations.md # Geometry and the Poincaré ball
-│   └── 02-learning.md    # Embeddings and hyperbolic GNNs
+│   ├── 02-learning.md    # Embeddings and hyperbolic GNNs
+│   ├── 03-models-and-maps.md # General-curvature Poincaré operations
+│   └── paper-map.md      # Evidence state and verified source metadata
 ├── datasets/             # Small data files used by selected notebooks
 ├── *.ipynb               # Research and experimental notebooks
 └── REPOSITORY_PROMPT.md  # Reusable prompt for future repository cleanup
@@ -74,8 +76,8 @@ begin in [`examples/`](examples/), which is kept small and reproducible.
 ## Run locally
 
 ```bash
-git clone https://github.com/TAUforPython/Graph-MachineLearning.git
-cd Graph-MachineLearning
+git clone https://github.com/D2718281828nis/ML-MachineLearning-Graphs.git
+cd ML-MachineLearning-Graphs
 python -m venv .venv
 source .venv/bin/activate      # Windows: .venv\Scripts\activate
 python -m pip install jupyter numpy matplotlib networkx
@@ -97,7 +99,6 @@ Read the bilingual learning path in
 ## Contributing
 
 When adding a notebook:
-
 
 1. use a descriptive `snake_case.ipynb` filename;
 2. include objectives, prerequisites, and an **Open in Colab** badge;

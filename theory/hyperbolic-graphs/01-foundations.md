@@ -1,5 +1,12 @@
 # 1. Foundations and the Poincaré ball / Основы и шар Пуанкаре
 
+> **Preliminary note / Предварительная заметка.** This older overview has not
+> yet received equation-level paper review. Use the declared general-curvature
+> convention in [Models and maps](03-models-and-maps.md) for implementation.
+> Этот ранний обзор ещё не прошёл проверку формул по статьям. Для реализации
+> используйте соглашение общей кривизны из раздела
+> [«Модели и отображения»](03-models-and-maps.md).
+
 ## English
 
 ### Why hyperbolic geometry?
