@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.0",
+  "status": "synthetic_smoke_not_clinical",
+  "example": "brain",
+  "seed": 41,
+  "config_snapshot": {
+    "example": "brain",
+    "mode": "synthetic",
+    "seed": 41,
+    "n_samples": 120,
+    "n_features": 18,
+    "k": 4,
+    "epochs": 6,
+    "models": [
+      "logistic",
+      "gcn",
+      "hyperbolic_gcn"
+    ],
+    "strict_inductive": true
+  },
+  "versions": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "sklearn": "1.9.0",
+    "torch": "2.13.0+cu130",
+    "torch_geometric": "2.8.0.post1"
+  },
+  "split": {
+    "unit": "patient",
+    "train": 72,
+    "validation": 24,
+    "test": 24
+  },
+  "graph": {
+    "density": 0.0546218487394958,
+    "isolated_nodes": 0,
+    "connected_components": 1,
+    "mean_degree": 6.5,
+    "max_degree": 16,
+    "edge_homophily": 0.6794871794871795,
+    "label_mixing": 0.3205128205128205
+  },
+  "edge_drop_audit": {
+    "density": 0.03620448179271709,
+    "isolated_nodes": 1,
+    "connected_components": 1,
+    "mean_degree": 4.308333333333334,
+    "max_degree": 10,
+    "edge_homophily": 0.688588007736944,
+    "label_mixing": 0.31141199226305605
+  },
+  "models": [
+    {
+      "model": "logistic",
+      "threshold_selected_on": "validation",
+      "threshold": 0.5099999999999999,
+      "metrics": {
+        "auprc": 0.6214497920380273,
+        "auroc": 0.7578125,
+        "f1": 0.5882352941176471,
+        "sensitivity": 0.625,
+        "specificity": 0.75,
+        "precision": 0.5555555555555556,
+        "balanced_accuracy": 0.6875,
+        "brier": 0.20658500492572784,
+        "confusion_matrix": [
+          [
+            12,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "auprc_ci95": [
+          0.3434878246753247,
+          0.9202314814814817
+        ]
+      },
+      "curvature": null,
+      "permutation_importance": [
+        0.2888077663077664,
+        0.011882197323373886,
+        0.011313131313131386,
+        0.05804313405319602,
+        0.028738148103473304,
+        0.006234049175225705,
+        0.10869182016240846,
+        0.06000416250416259,
+        0.06745302799482371,
+        0.011868686868686954,
+        0.018066655566655692,
+        0.04491178927711437,
+        0.005925925925925964,
+        0.021781045751634087,
+        0.06598626082641441,
+        0.029267740057213776,
+        0.2225176433872087,
+        0.045238095238095265
+      ]
+    },
+    {
+      "model": "gcn",
+      "threshold_selected_on": "validation",
+      "threshold": 0.24999999999999994,
+      "metrics": {
+        "auprc": 0.7150793650793651,
+        "auroc": 0.765625,
+        "f1": 0.5833333333333334,
+        "sensitivity": 0.875,
+        "specificity": 0.4375,
+        "precision": 0.4375,
+        "balanced_accuracy": 0.65625,
+        "brier": 0.1773308664560318,
+        "confusion_matrix": [
+          [
+            7,
+            9
+          ],
+          [
+            1,
+            7
+          ]
+        ],
+        "auprc_ci95": [
+          0.46079899267399266,
+          0.9290821909571911
+        ]
+      },
+      "curvature": null,
+      "permutation_importance": null
+    },
+    {
+      "model": "hyperbolic_gcn",
+      "threshold_selected_on": "validation",
+      "threshold": 0.31999999999999995,
+      "metrics": {
+        "auprc": 0.6250552143934497,
+        "auroc": 0.703125,
+        "f1": 0.47058823529411764,
+        "sensitivity": 0.5,
+        "specificity": 0.6875,
+        "precision": 0.4444444444444444,
+        "balanced_accuracy": 0.59375,
+        "brier": 0.19335107505321503,
+        "confusion_matrix": [
+          [
+            11,
+            5
+          ],
+          [
+            4,
+            4
+          ]
+        ],
+        "auprc_ci95": [
+          0.32855425824175827,
+          0.8786924844698646
+        ]
+      },
+      "curvature": 0.6928123235702515,
+      "permutation_importance": null
+    }
+  ],
+  "prediction_schema": [
+    "deidentified_record_id",
+    "split",
+    "label",
+    "probability",
+    "seed"
+  ]
+}

@@ -9,4 +9,8 @@ reports/*.json
 reports/*.csv
 reports/*.png
 !reports/.gitkeep
+!reports/*_smoke.json
+!reports/NOTEBOOK_RUNS.md
+!reports/notebook-runs/
+!reports/notebook-runs/*.ipynb
 mlruns/
