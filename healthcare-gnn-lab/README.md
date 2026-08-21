@@ -194,7 +194,35 @@ Open the notebooks in Google Colab:
 | MIMIC EHR graph | [Open](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/healthcare-gnn-lab/notebooks/03_mimic_ehr_graph.ipynb) | Shared runner plus tested temporal/phenotype guards |
 | Optional brain hypergraph | [Open](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/healthcare-gnn-lab/notebooks/04_brain_hypergraph_optional.ipynb) | Shared runner plus transparent tested incidence operator |
 
-A clean Colab run is not yet recorded. Each notebook states that limitation.
+A clean local CPU run of all four structured notebooks is recorded in
+[`reports/NOTEBOOK_RUNS.md`](reports/NOTEBOOK_RUNS.md), with executed notebook
+copies in `reports/notebook-runs/` and machine-readable JSON reports beside it.
+This is not a clean Colab verification and the synthetic results remain
+non-clinical.
+
+Локальный CPU-запуск всех четырёх структурированных notebooks записан в
+[`reports/NOTEBOOK_RUNS.md`](reports/NOTEBOOK_RUNS.md); выполненные копии
+находятся в `reports/notebook-runs/`, а рядом сохранены JSON-отчёты. Это не
+проверка в чистом Colab, а synthetic-результаты не имеют клинического значения.
+
+### Exploratory studies 05–07 / Исследовательские работы 05–07
+
+The three reviewed medical/genomic experiments now follow the flat numbered
+structure in `notebooks/`; the obsolete `legacy/` directory has been removed.
+
+| Notebook | Cell workflow / Логика ячеек | Status / Статус |
+|---|---|---|
+| `05_genomic_population_gcn_exploratory.ipynb` | Genetic table → k-NN sample graph → PCA/t-SNE/network plots → PyG GCN width comparison. / Генетическая таблица → k-NN граф → визуализации → сравнение ширины PyG GCN. | Sensitive population-inference exploration; missing the complete lab split/leakage contract. / Исследовательская sensitive-задача без полного leakage-контракта. |
+| `06_hyperbolic_tp53_sequences_exploratory.ipynb` | TP53 sequence encoding → edit-distance graph → custom hyperbolic GNN → hierarchy loss, clustering, visualization, and Euclidean comparison. / Кодирование TP53 → edit-distance граф → custom hyperbolic GNN → clustering и сравнение. | Custom geometry and a stored error need independent validation; no clinical conclusion. / Custom-геометрия и сохранённая ошибка требуют проверки. |
+| `07_vitiligo_image_clustering_exploratory.ipynb` | Composite image download/slicing → image quantities and segmentation → KL-based agglomerative grading exploration. / Загрузка и разбиение изображения → признаки и сегментация → KL-based clustering. | Fixed image and Colab paths; not validated grading software. / Одно изображение и Colab-пути; не валидированная система. |
+
+These notebooks preserve the original cell-oriented code and stored outputs.
+Unlike smoke-enabled notebooks 01–04, they are not executed by
+`scripts/run_notebooks.py` and do **not** yet implement the complete split,
+temporal, baseline, and reporting contract from `src/`. See the bilingual
+[`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md). / Эти notebooks сохраняют
+исходный код и outputs, не запускаются smoke-runner и пока не реализуют полный
+контракт лаборатории; подробности приведены в двуязычном анализе.
 
 ## Repository tree
 
@@ -202,7 +230,7 @@ A clean Colab run is not yet recorded. Each notebook states that limitation.
 healthcare-gnn-lab/
 ├── README.md, pyproject.toml, .gitignore
 ├── configs/                    # four smoke configs + reviewed full-data template
-├── notebooks/                  # four thin Colab entry points
+├── notebooks/                  # 01–04 smoke entry points; 05–07 explorations
 ├── reports/.gitkeep            # generated JSON/CSV/plots are ignored
 ├── src/healthcare_gnn/
 │   ├── cli.py

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Inventory and classify the legacy notebooks stored in the repository root."""
+"""Inventory notebooks across the repository and enforce the root policy."""
 
 from __future__ import annotations
 
@@ -11,21 +11,28 @@ from pathlib import Path
 
 
 CLASSIFICATION = {
-    "AGC - agglomerative clustering medical image.ipynb": "Clustering / medical imaging",
-    "GCN genom classification.ipynb": "Graph neural networks / genomics",
+    "07_vitiligo_image_clustering_exploratory.ipynb": "Clustering / medical imaging",
+    "05_genomic_population_gcn_exploratory.ipynb": "Graph neural networks / genomics",
     "Graph from DataFrame tSNE.ipynb": "Graph construction / dimensionality reduction",
     "Gromov-Waserstein graph clastering.ipynb": "Gromov-Wasserstein / clustering",
     "Gromov-Wasserstein distance Transport Task.ipynb": "Gromov-Wasserstein / optimal transport",
-    "Hyperbolic GNN for genomic data.ipynb": "Hyperbolic learning / genomics",
+    "06_hyperbolic_tp53_sequences_exploratory.ipynb": "Hyperbolic learning / genomics",
     "Hyperbolic Graph Neural Network.ipynb": "Hyperbolic learning / GNN",
     "LLM Graph triplets visualisation.ipynb": "Knowledge graphs / LLM visualization",
     "ML task table PCA ICA tSNE DBSCAN AggClustering SVM.ipynb": "Classical ML / method survey",
     "Poincare ball for Graph.ipynb": "Hyperbolic learning / visualization",
     "example Gated Graph Attention Network.ipynb": "Graph neural networks / attention",
     "example_Interactive_Graph_Visualisation.ipynb": "Graph visualization / interactive",
-    "utils_ERD2MMD.ipynb": "Utilities / ERD conversion",
-    "utils_ERD2MMD_graph_visualisation.ipynb": "Utilities / ERD visualization",
-    "utils_ERD2MMD_interactive_graph_visualisation.ipynb": "Utilities / ERD interactive visualization",
+    "erd_to_mermaid.ipynb": "Utilities / ERD conversion",
+    "erd_graph_visualisation.ipynb": "Utilities / ERD visualization",
+    "erd_interactive_graph_visualisation.ipynb": "Utilities / ERD interactive visualization",
+    "01_patient_similarity_mi.ipynb": "Healthcare / patient similarity",
+    "02_ptbxl_ecg_graph.ipynb": "Healthcare / ECG",
+    "03_mimic_ehr_graph.ipynb": "Healthcare / EHR",
+    "04_brain_hypergraph_optional.ipynb": "Healthcare / brain hypergraph",
+    "ai_medical_devices_graph_visualizations.ipynb": "Examples / medical devices",
+    "graph_learning_basics.ipynb": "Examples / graph basics",
+    "hyperbolic_graph_basics.ipynb": "Examples / hyperbolic basics",
 }
 
 
@@ -92,7 +99,8 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    audits = [audit_notebook(path) for path in sorted(args.root.glob("*.ipynb"))]
+    paths = [path for path in args.root.rglob("*.ipynb") if ".git" not in path.parts]
+    audits = [audit_notebook(path) for path in sorted(paths)]
     if args.json:
         print(json.dumps([asdict(audit) for audit in audits], ensure_ascii=False, indent=2))
         return
@@ -104,10 +112,21 @@ def main() -> None:
             f"{audit.executed_code_cells}/{audit.code_cells}\t"
             f"{audit.stored_outputs}\t{len(audit.stored_errors)}\t{audit.size_mb:.2f}"
         )
-    print(f"\nRoot notebooks: {len(audits)}")
+    root_notebooks = [path for path in paths if path.parent == args.root]
+    print(f"\nNotebooks: {len(audits)}; root notebooks: {len(root_notebooks)}")
     unclassified = [audit.file for audit in audits if audit.category == "Unclassified"]
     if unclassified:
-        raise SystemExit(f"Unclassified root notebooks: {', '.join(unclassified)}")
+        raise SystemExit(f"Unclassified notebooks: {', '.join(unclassified)}")
+    invalid_root = [
+        path.name
+        for path in root_notebooks
+        if not path.name.lower().startswith(("demo", "example"))
+    ]
+    if invalid_root:
+        raise SystemExit(
+            "Only demo/example notebooks may remain in root: "
+            + ", ".join(invalid_root)
+        )
 
 
 if __name__ == "__main__":

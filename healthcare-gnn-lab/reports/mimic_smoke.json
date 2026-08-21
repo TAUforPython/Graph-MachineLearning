@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "status": "synthetic_smoke_not_clinical",
+  "example": "mimic",
+  "seed": 31,
+  "config_snapshot": {
+    "example": "mimic",
+    "mode": "synthetic",
+    "seed": 31,
+    "n_samples": 150,
+    "n_features": 24,
+    "k": 3,
+    "epochs": 8,
+    "models": [
+      "logistic",
+      "gcn",
+      "hyperbolic_gcn"
+    ],
+    "strict_inductive": true
+  },
+  "versions": {
+    "python": "3.14.4",
+    "numpy": "2.5.2",
+    "sklearn": "1.9.0",
+    "torch": "2.13.0+cu130",
+    "torch_geometric": "2.8.0.post1"
+  },
+  "split": {
+    "unit": "patient",
+    "train": 90,
+    "validation": 30,
+    "test": 30
+  },
+  "graph": {
+    "density": 0.033646532438478746,
+    "isolated_nodes": 0,
+    "connected_components": 1,
+    "mean_degree": 5.013333333333334,
+    "max_degree": 14,
+    "edge_homophily": 0.6861702127659575,
+    "label_mixing": 0.31382978723404253
+  },
+  "edge_drop_audit": {
+    "density": 0.02232662192393736,
+    "isolated_nodes": 8,
+    "connected_components": 5,
+    "mean_degree": 3.3266666666666667,
+    "max_degree": 10,
+    "edge_homophily": 0.6933867735470942,
+    "label_mixing": 0.3066132264529058
+  },
+  "models": [
+    {
+      "model": "logistic",
+      "threshold_selected_on": "validation",
+      "threshold": 0.12,
+      "metrics": {
+        "auprc": 0.8512400793650794,
+        "auroc": 0.9204545454545454,
+        "f1": 0.5714285714285714,
+        "sensitivity": 1.0,
+        "specificity": 0.45454545454545453,
+        "precision": 0.4,
+        "balanced_accuracy": 0.7272727272727273,
+        "brier": 0.12989641726016998,
+        "confusion_matrix": [
+          [
+            10,
+            12
+          ],
+          [
+            0,
+            8
+          ]
+        ],
+        "auprc_ci95": [
+          0.60515608875129,
+          1.0
+        ]
+      },
+      "curvature": null,
+      "permutation_importance": [
+        -0.0384290384967629,
+        0.04651538920888776,
+        0.013980441210300584,
+        -0.034396601212037324,
+        -0.006819183902517197,
+        0.022885867309886915,
+        0.004161930472672178,
+        0.0,
+        0.04496937127366307,
+        0.058929437674277774,
+        -0.04715591232812596,
+        0.008428594610870163,
+        0.008340011930698258,
+        0.010431972159380557,
+        -0.008876771236695133,
+        0.031484129069913415,
+        -0.01694898919163627,
+        0.08268716820650128,
+        0.022867126474470496,
+        0.003492320035904902,
+        0.006694807552650728,
+        0.029143217242641867,
+        0.041002550009903084,
+        -0.07671176783599391
+      ]
+    },
+    {
+      "model": "gcn",
+      "threshold_selected_on": "validation",
+      "threshold": 0.35999999999999993,
+      "metrics": {
+        "auprc": 0.573241341991342,
+        "auroc": 0.7613636363636364,
+        "f1": 0.6363636363636364,
+        "sensitivity": 0.875,
+        "specificity": 0.6818181818181818,
+        "precision": 0.5,
+        "balanced_accuracy": 0.7784090909090908,
+        "brier": 0.1827826350927353,
+        "confusion_matrix": [
+          [
+            15,
+            7
+          ],
+          [
+            1,
+            7
+          ]
+        ],
+        "auprc_ci95": [
+          0.29641931165099267,
+          0.8712310606060606
+        ]
+      },
+      "curvature": null,
+      "permutation_importance": null
+    },
+    {
+      "model": "hyperbolic_gcn",
+      "threshold_selected_on": "validation",
+      "threshold": 0.22999999999999998,
+      "metrics": {
+        "auprc": 0.6455357142857143,
+        "auroc": 0.8579545454545454,
+        "f1": 0.5161290322580645,
+        "sensitivity": 1.0,
+        "specificity": 0.3181818181818182,
+        "precision": 0.34782608695652173,
+        "balanced_accuracy": 0.6590909090909091,
+        "brier": 0.163337841629982,
+        "confusion_matrix": [
+          [
+            7,
+            15
+          ],
+          [
+            0,
+            8
+          ]
+        ],
+        "auprc_ci95": [
+          0.35014953678839955,
+          0.968422619047619
+        ]
+      },
+      "curvature": 0.6907876133918762,
+      "permutation_importance": null
+    }
+  ],
+  "prediction_schema": [
+    "deidentified_record_id",
+    "split",
+    "label",
+    "probability",
+    "seed"
+  ]
+}
