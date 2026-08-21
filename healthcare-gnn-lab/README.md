@@ -196,6 +196,25 @@ Open the notebooks in Google Colab:
 
 A clean Colab run is not yet recorded. Each notebook states that limitation.
 
+### Preserved legacy studies / Сохранённые legacy-исследования
+
+Three medical or genomic exploratory notebooks were moved from the repository
+root into `notebooks/legacy/`: vitiligo image clustering, genomic-population GCN
+classification, and a hyperbolic GNN for TP53 protein sequences. They preserve
+the original cell-oriented experiments and stored outputs for review; unlike the
+numbered notebooks, they do **not** yet implement the complete split, temporal,
+baseline, and reporting contract from `src/`. See the bilingual
+[`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md) before running or adapting
+them.
+
+Три исследовательских notebook по медицинским изображениям и геномике перенесены
+из корня репозитория в `notebooks/legacy/`: кластеризация изображений витилиго,
+GCN-классификация геномных популяций и гиперболическая GNN для
+TP53-последовательностей. Исходные ячейки и сохранённые outputs оставлены для
+аудита, но эти notebooks пока **не** реализуют полный контракт из `src/` для
+split, времени, baseline и отчётности. Перед запуском или адаптацией прочитайте
+двуязычный [`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md).
+
 ## Repository tree
 
 ```text
@@ -203,6 +222,7 @@ healthcare-gnn-lab/
 ├── README.md, pyproject.toml, .gitignore
 ├── configs/                    # four smoke configs + reviewed full-data template
 ├── notebooks/                  # four thin Colab entry points
+│   └── legacy/                 # isolated medical/genomic explorations
 ├── reports/.gitkeep            # generated JSON/CSV/plots are ignored
 ├── src/healthcare_gnn/
 │   ├── cli.py

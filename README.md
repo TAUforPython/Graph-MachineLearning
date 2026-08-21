@@ -1,124 +1,137 @@
-# Graph Machine Learning
+# Graph Machine Learning / Машинное обучение на графах
 
-Practical notebooks for graph visualization, graph neural networks (GNNs),
-Gromov–Wasserstein methods, and hyperbolic graph learning.
+A collection of educational examples, exploratory notebooks, and a structured,
+leakage-aware healthcare GNN laboratory. / Коллекция учебных примеров,
+исследовательских notebooks и структурированной лаборатории healthcare GNN с
+контролем утечек данных.
 
-> **Languages:** the project navigation is in English. The hyperbolic-graph
-> notes are bilingual (English + Русский).
+> **Research notice / Важно:** stored outputs in legacy notebooks show prior
+> experiments; they are not proof of a clean reproducible run or clinical
+> validity. / Сохранённые результаты legacy-notebooks не доказывают
+> воспроизводимость или клиническую применимость.
 
-## Start here
+## Start here / С чего начать
 
-For the leakage-aware healthcare experiments, shared library, tests, and four
-task notebooks, see **[`healthcare-gnn-lab/`](healthcare-gnn-lab/README.md)**.
-Its synthetic smoke mode checks software plumbing only and is not clinical
-evidence.
-
-The notebooks run in a browser with Google Colab; no local installation is
-needed. Open an example, then select **Runtime → Run all**.
-
-| Beginner example | What it demonstrates | Colab |
+| Path / Раздел | English | Русский |
 |---|---|---|
-| Graph learning basics | Build, inspect, and visualize a graph | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/examples/graph_learning_basics.ipynb) |
-| Hyperbolic graph basics | Poincaré-ball distances and a tree embedding | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/examples/hyperbolic_graph_basics.ipynb) |
+| [`examples/`](examples/) | Curated, small learning notebooks | Небольшие учебные notebooks |
+| [`healthcare-gnn-lab/`](healthcare-gnn-lab/README.md) | Tested healthcare pipeline and task entry points | Тестируемый healthcare pipeline и входные notebooks |
+| [`research-notebooks/`](research-notebooks/) | Preserved exploratory graph-ML work | Сохранённые исследовательские эксперименты |
+| [`utilities/notebooks/`](utilities/notebooks/) | ERD conversion and visualization tools | Утилиты преобразования и визуализации ERD |
+| [`docs/NOTEBOOK_ANALYSIS.md`](docs/NOTEBOOK_ANALYSIS.md) | What every notebook does and its limitations | Назначение и ограничения каждого notebook |
+| [`theory/hyperbolic-graphs/`](theory/hyperbolic-graphs/README.md) | Bilingual hyperbolic-graph theory | Двуязычная теория гиперболических графов |
 
-Each example contains its own Colab badge, learning objectives, explanations,
-and deterministic checks. Verification status is stated inside each notebook.
+The repository root intentionally contains only notebooks whose filenames begin
+with `example` or `demo`. / В корне намеренно оставлены только notebooks, имена
+которых начинаются с `example` или `demo`.
 
-## Repository map
+## Repository map / Структура репозитория
 
 ```text
 .
-├── examples/             # Small, documented, Colab-ready starting points
-├── theory/hyperbolic-graphs/
-│   ├── README.md         # Bilingual theory index
-│   ├── 01-foundations.md # Geometry and the Poincaré ball
-│   ├── 02-learning.md    # Embeddings and hyperbolic GNNs
-│   ├── 03-models-and-maps.md # General-curvature Poincaré operations
-│   └── paper-map.md      # Evidence state and verified source metadata
-├── datasets/             # Small data files used by selected notebooks
-├── *.ipynb               # Research and experimental notebooks
-└── REPOSITORY_PROMPT.md  # Reusable prompt for future repository cleanup
+├── example*.ipynb              # root-level demos / корневые примеры
+├── examples/                   # curated tutorials / учебные материалы
+├── research-notebooks/         # non-medical exploratory work / исследования
+├── utilities/notebooks/        # ERD tools / утилиты ERD
+├── healthcare-gnn-lab/
+│   ├── notebooks/              # thin structured task entry points
+│   │   └── legacy/             # preserved medical/genomic explorations
+│   ├── src/healthcare_gnn/     # reusable implementation
+│   ├── configs/ and tests/
+│   └── README.md               # bilingual lab guide / руководство
+├── datasets/                   # small public example assets
+├── theory/hyperbolic-graphs/   # EN/RU theory
+└── scripts/audit_notebooks.py  # JSON/inventory/root-policy audit
 ```
 
-## Notebook catalogue
+## Notebook groups / Группы notebooks
 
-The root contains 15 legacy research notebooks. See the
-**[full notebook review and classification](docs/NOTEBOOK_REVIEW.md)** for a
-file-by-file reproducibility assessment, detected blockers, maturity labels,
-and recommended migration order. The short list below is navigation, not a
-claim that every research notebook currently runs end to end.
+### Root examples / Примеры в корне
 
-### Hyperbolic learning
+- `example Gated Graph Attention Network.ipynb` implements a custom gated
+  multi-head attention layer. / Реализует gated multi-head attention layer.
+- `example_Interactive_Graph_Visualisation.ipynb` builds a small NetworkX graph
+  and renders it interactively. / Строит небольшой граф NetworkX и создаёт
+  интерактивную визуализацию.
 
-- `Poincare ball for Graph.ipynb` — visual intuition for graph layouts in the
-  Poincaré ball.
-- `Hyperbolic Graph Neural Network.ipynb` — a hyperbolic GNN experiment.
-- `Hyperbolic GNN for genomic data.ipynb` — hyperbolic learning on genomic
-  features.
+### Healthcare / Здравоохранение
 
-### Graph neural networks and visualization
+Medical and genomic notebooks now live under
+[`healthcare-gnn-lab/notebooks/`](healthcare-gnn-lab/notebooks/). The numbered
+notebooks are thin entry points into tested code in `src/`; preserved experiments
+are isolated in `notebooks/legacy/`. / Медицинские и геномные notebooks находятся
+в `healthcare-gnn-lab/notebooks/`: нумерованные notebooks используют тестируемый
+код из `src/`, а исходные эксперименты изолированы в `notebooks/legacy/`.
 
-- `GCN genom classification.ipynb` — population classification with a GCN.
-- `example Gated Graph Attention Network.ipynb` — gated graph attention.
-- `example_Interactive_Graph_Visualisation.ipynb` — interactive graph display.
-- `Graph from DataFrame tSNE.ipynb` — graph construction from tabular data.
-- `LLM Graph triplets visualisation.ipynb` — visualization of extracted
-  knowledge-graph triplets.
+The legacy genomic GCN, protein-sequence hyperbolic GNN, and vitiligo image
+clustering notebooks are exploratory adaptations, **not** diagnostic tools. /
+Legacy-notebooks с genomic GCN, гиперболической GNN для белковых
+последовательностей и кластеризацией изображений витилиго являются
+исследовательскими примерами, **не** диагностическими средствами.
 
-### Distances, clustering, and utilities
+### Research and utilities / Исследования и утилиты
 
-- `Gromov-Wasserstein distance Transport Task.ipynb` — optimal-transport
-  distance between structured datasets.
-- `Gromov-Waserstein graph clastering.ipynb` — graph clustering with GW ideas.
-- `AGC - agglomerative clustering medical image.ipynb` — image clustering.
-- `ML task table PCA ICA tSNE DBSCAN AggClustering SVM.ipynb` — a broad
-  comparison of classical methods.
-- `utils_ERD2MMD*.ipynb` — ERD-to-Mermaid and visualization utilities.
+General graph construction, Gromov–Wasserstein, hyperbolic GNN, LLM triplet, and
+classical-ML surveys are in [`research-notebooks/`](research-notebooks/). ERD to
+Mermaid and ERD visualization notebooks are in
+[`utilities/notebooks/`](utilities/notebooks/). / Общие эксперименты перенесены
+в `research-notebooks/`, а ERD-конвертеры и визуализаторы — в
+`utilities/notebooks/`.
 
-Research notebooks preserve their original exploratory form. New users should
-begin in [`examples/`](examples/), which contains the curated learning material;
-do not infer a successful clean run unless the notebook records one.
+See the [bilingual notebook analysis](docs/NOTEBOOK_ANALYSIS.md) for code flow,
+data dependencies, and known blockers. / Подробный двуязычный разбор кода,
+зависимостей и ограничений находится в
+[анализе notebooks](docs/NOTEBOOK_ANALYSIS.md).
 
-## Run locally
+## Run / Запуск
+
+For lightweight notebooks / Для простых notebooks:
 
 ```bash
-git clone https://github.com/D2718281828nis/ML-MachineLearning-Graphs.git
-cd ML-MachineLearning-Graphs
 python -m venv .venv
-source .venv/bin/activate      # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 python -m pip install jupyter numpy matplotlib networkx
 jupyter lab
 ```
 
-Package requirements differ between research notebooks. Read their first cells
-before running them; Colab installation cells are notebook-specific.
+Healthcare lab / Healthcare-лаборатория:
 
-## Hyperbolic graph theory / Теория гиперболических графов
+```bash
+cd healthcare-gnn-lab
+python -m pip install -e '.[test,data]'
+pytest
+healthcare-gnn --config configs/mi_smoke.json --output reports/mi_smoke.json
+```
 
-Read the bilingual learning path in
-[`theory/hyperbolic-graphs/`](theory/hyperbolic-graphs/README.md). It covers:
+Audit notebook JSON and placement / Проверка JSON и расположения notebooks:
 
-1. why trees and hierarchies fit hyperbolic space;
-2. the Poincaré-ball model and its distance function;
-3. hyperbolic embeddings, message passing, and practical numerical safeguards.
+```bash
+python scripts/audit_notebooks.py
+```
 
-The current rigorous increment declares its curvature convention, maps formulas
-to notebook functions, and records unresolved source checks in the
-[theory editorial plan](docs/HYPERBOLIC_THEORY_PLAN.md). Research notebooks keep
-their existing reproducibility warnings.
+Research notebooks have notebook-specific dependencies, external downloads, and
+occasionally Colab-only APIs. Read the analysis before running them. /
+Исследовательские notebooks имеют собственные зависимости, внешние загрузки и
+иногда требуют Google Colab. Перед запуском прочитайте анализ.
 
-## Contributing
+## Contributing / Как внести вклад
 
-When adding a notebook:
+1. Put only `demo*.ipynb` or `example*.ipynb` in the root; place reusable
+   tutorials in `examples/`, healthcare work in `healthcare-gnn-lab/`, and tools
+   in `utilities/`. / В корне оставляйте только `demo*` или `example*`.
+2. Use descriptive `snake_case` filenames for new notebooks. / Используйте
+   понятные имена в `snake_case`.
+3. State objectives, prerequisites, expected runtime, data provenance, and
+   verification status. / Укажите цели, зависимости, время, происхождение данных
+   и статус проверки.
+4. Set seeds, avoid absolute paths and secrets, and fit preprocessing on training
+   data only. / Фиксируйте seed, не используйте абсолютные пути и секреты,
+   обучайте preprocessing только на train.
+5. Validate JSON, run relevant tests, and never claim clinical performance from
+   synthetic data. / Проверяйте JSON и тесты; не делайте клинических выводов по
+   synthetic-данным.
 
-1. use a descriptive `snake_case.ipynb` filename;
-2. include objectives, prerequisites, and an **Open in Colab** badge;
-3. install non-Colab dependencies in the first executable cell;
-4. set random seeds and avoid machine-specific paths;
-5. keep downloaded data small and use stable HTTPS URLs;
-6. restart the runtime and verify **Run all** before committing;
-7. clear accidental secrets and unnecessarily large cell outputs.
+## License / Лицензия
 
-## License
-
-This repository is distributed under the terms in [`LICENSE`](LICENSE).
+Distributed under [`LICENSE`](LICENSE). / Распространяется на условиях
+[`LICENSE`](LICENSE).

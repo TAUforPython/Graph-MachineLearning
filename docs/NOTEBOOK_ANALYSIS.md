@@ -1,0 +1,82 @@
+# Notebook analysis / Анализ notebooks
+
+This inventory explains the **code path**, not just the title. It is based on a
+static inspection of cells and stored outputs; only the checks listed in the
+commit summary establish current execution status. / Этот каталог описывает
+**логику кода**, а не только названия. Он основан на статическом просмотре ячеек
+и сохранённых outputs; актуальный статус запуска определяется только проверками,
+указанными в итогах изменения.
+
+## Curated examples / Учебные примеры
+
+| Notebook | What the code does / Что делает код | Status and limits / Статус и ограничения |
+|---|---|---|
+| `examples/graph_learning_basics.ipynb` | Creates, inspects, and plots a small NetworkX graph. / Создаёт, исследует и рисует небольшой граф NetworkX. | Deterministic teaching example; see its in-notebook verification statement. / Детерминированный учебный пример; статус указан внутри. |
+| `examples/hyperbolic_graph_basics.ipynb` | Computes Poincaré-ball distances and embeds a tree. / Вычисляет расстояния Пуанкаре и embedding дерева. | Numerical illustration, not a trained GNN. / Численный пример, не обученная GNN. |
+| `examples/ai_medical_devices_graph_visualizations.ipynb` | Builds device/relationship graphs and several visualizations. / Строит граф медицинских устройств и визуализации. | Educational visualization; no outcome prediction. / Учебная визуализация без прогноза исходов. |
+| `example Gated Graph Attention Network.ipynb` | Defines a gated, multi-head graph-attention layer in PyTorch/PyG. / Определяет gated multi-head graph-attention layer. | Pins wheel assumptions to a Colab CUDA/PyTorch combination; may need dependency updates. / Зависит от конкретной Colab CUDA/PyTorch-сборки. |
+| `example_Interactive_Graph_Visualisation.ipynb` | Creates a five-node NetworkX graph and serializes an interactive view. / Создаёт граф из пяти вершин и интерактивное представление. | Uses browser/Colab display behavior. / Использует браузерный/Colab display. |
+
+## Structured healthcare lab / Структурированная healthcare-лаборатория
+
+The numbered notebooks are orchestration layers. They load JSON configuration
+and call reusable, tested components from `healthcare-gnn-lab/src/healthcare_gnn`
+rather than hiding model logic in cells. / Нумерованные notebooks являются
+слоем orchestration: они загружают JSON-конфигурацию и вызывают переиспользуемые
+компоненты из `src/`, не скрывая логику модели в ячейках.
+
+| Notebook | Pipeline / Pipeline |
+|---|---|
+| `01_patient_similarity_mi.ipynb` | Patient-level split → train-only preprocessing → label-free similarity graph → logistic, GCN, and Poincaré/tangent comparison. / Split по пациентам → train-only preprocessing → граф без меток → сравнение logistic, GCN и Poincaré/tangent. |
+| `02_ptbxl_ecg_graph.ipynb` | Demonstrates the 12-lead ECG graph/encoder interface and shared smoke runner. / Демонстрирует интерфейс графа 12 ECG-отведений, encoder и общий smoke runner. |
+| `03_mimic_ehr_graph.ipynb` | Exercises temporal and phenotype guards for EHR plus the shared runner. / Проверяет временные и phenotype-ограничения EHR и общий runner. |
+| `04_brain_hypergraph_optional.ipynb` | Applies an explicit incidence matrix/operator for an optional brain hypergraph adaptation. / Использует явную incidence-матрицу для brain-hypergraph адаптации. |
+
+Synthetic runs test plumbing only. Real medical work requires access review,
+patient grouping, temporal feature audit, nested validation, repeated seeds, and
+external validation. / Synthetic-запуски проверяют только pipeline. Для реального
+исследования нужны контроль доступа, split по пациентам, временной аудит
+признаков, nested validation, разные seed и внешняя проверка.
+
+### Preserved medical/genomic explorations / Сохранённые медицинские и геномные эксперименты
+
+| Notebook | What the cells do / Что делают ячейки | Why it is legacy / Почему legacy |
+|---|---|---|
+| `legacy/genomic_population_gcn.ipynb` | Loads genetic tabular data, constructs a k-NN sample graph, visualizes PCA/t-SNE/network layouts, trains a PyG GCN, and compares hidden widths. / Загружает генетическую таблицу, строит k-NN граф образцов, визуализирует PCA/t-SNE/сеть, обучает PyG GCN и сравнивает hidden width. | Data loading is notebook-specific and the original evaluation does not implement the lab's complete patient/group leakage contract. Population inference is sensitive and is not a clinical classifier. / Загрузка специфична, а оценка не реализует полный leakage-контракт лаборатории; population inference — чувствительная задача, не клинический классификатор. |
+| `legacy/hyperbolic_gnn_genomic_data.ipynb` | Encodes TP53 protein sequences, computes edit distances, creates k-NN adjacency, trains a custom hyperbolic model with an unsupervised hierarchy loss, clusters/plots embeddings, and compares Euclidean methods. / Кодирует TP53-последовательности, считает edit distance, строит k-NN adjacency, обучает custom hyperbolic model, кластеризует/рисует embeddings и сравнивает Euclidean methods. | Custom geometry and stored error require independent numerical validation; example sequences are not clinical evidence. / Custom-геометрия и сохранённая ошибка требуют проверки; пример не является клиническим доказательством. |
+| `legacy/agglomerative_clustering_medical_image.ipynb` | Downloads a composite vitiligo image, slices it into regions, derives image/segmentation quantities, and explores KL-divergence-based agglomerative grading. / Загружает composite-изображение витилиго, делит на области, вычисляет признаки/сегментацию и исследует agglomerative grading на основе KL divergence. | Uses a fixed image and Colab paths; it is an exploratory reproduction, not validated grading software. / Использует одно изображение и Colab-пути; это исследовательский пример, а не валидированная grading-система. |
+
+These files are placed beside—but deliberately separated from—the numbered lab
+entry points. Reimplementation should migrate reviewed data contracts and model
+components into `src/` before any result is compared with the lab baselines. /
+Файлы находятся рядом, но отделены от нумерованных notebooks. Перед сравнением с
+baseline нужно перенести проверенные data contracts и компоненты моделей в `src/`.
+
+## Research notebooks / Исследовательские notebooks
+
+| Notebook | Code behavior / Поведение кода | Main blocker / Главное ограничение |
+|---|---|---|
+| `Graph from DataFrame tSNE.ipynb` | Downloads a red/green table, plots it, runs t-SNE and a classifier, builds a neighbor graph, then introduces GW clustering. / Загружает red/green таблицу, запускает t-SNE/classifier, строит neighbor graph и вводит GW clustering. | External URL and exploratory state. / Внешняя ссылка и исследовательский статус. |
+| `Gromov-Waserstein graph clastering.ipynb` | Loads the same table and invokes the external Spectral-Gromov-Wasserstein repository for graph clustering. / Загружает таблицу и использует внешний Spectral-Gromov-Wasserstein repo. | Stored error and unpinned external code. / Сохранённая ошибка и незакреплённая внешняя версия. |
+| `Gromov-Wasserstein distance Transport Task.ipynb` | Creates synthetic structured graphs and computes/visualizes a GW-style transport comparison. / Создаёт synthetic-графы и визуализирует GW transport comparison. | Demonstration rather than benchmark. / Демонстрация, не benchmark. |
+| `Hyperbolic Graph Neural Network.ipynb` | Defines simplified hyperbolic linear/convolution operations, loads a CSV, trains/plots a Poincaré representation. / Определяет упрощённые hyperbolic layers, загружает CSV, обучает и рисует Poincaré representation. | Assumes a local data path and simplified manifold operations. / Требует локальные данные и использует упрощённую геометрию. |
+| `Poincare ball for Graph.ipynb` | Contrasts Euclidean and Poincaré positions and illustrates boundary-distance effects. / Сравнивает Euclidean/Poincaré позиции и эффект границы. | Visual intuition only. / Только визуальная интуиция. |
+| `LLM Graph triplets visualisation.ipynb` | Calls Mistral to extract triples, turns them into NetworkX/PyVis graphs, and exports HTML. / Вызывает Mistral для triples, строит NetworkX/PyVis граф и экспортирует HTML. | Requires a user API key; never commit it. / Требует API key пользователя; ключ нельзя коммитить. |
+| `ML task table PCA ICA tSNE DBSCAN AggClustering SVM.ipynb` | Generates several synthetic tabular cases and surveys PCA, Kernel PCA, ICA, t-SNE, DBSCAN, one-class/SVC, agglomerative clustering, and k-means. / Генерирует synthetic cases и сравнивает PCA, Kernel PCA, ICA, t-SNE, DBSCAN, SVM, agglomerative clustering и k-means. | Large exploratory notebook with partially executed cells and repeated state. / Большой notebook с частичным выполнением и повторно используемым state. |
+
+## Utilities / Утилиты
+
+| Notebook | Function / Назначение | Limits / Ограничения |
+|---|---|---|
+| `utilities/notebooks/erd_to_mermaid.ipynb` | Parses uploaded ERD XML and emits Mermaid text. / Разбирает ERD XML и формирует Mermaid. | Colab upload/widgets; test only with non-sensitive schemas. / Colab upload/widgets; используйте только нечувствительные схемы. |
+| `utilities/notebooks/erd_graph_visualisation.ipynb` | Parses ERD entities/relations and creates static clustered NetworkX figures. / Создаёт статические clustered NetworkX-визуализации ERD. | Layout is heuristic and stored output is large. / Heuristic layout и большой output. |
+| `utilities/notebooks/erd_interactive_graph_visualisation.ipynb` | Adds interactive ERD rendering and optional AI-assisted translation workflow. / Добавляет интерактивный ERD-rendering и опциональный AI-перевод. | Colab-only upload/display and external-service review may be required. / Требует Colab и проверки внешнего сервиса. |
+
+## Audit method / Метод проверки
+
+Run `python scripts/audit_notebooks.py`. It recursively validates JSON parsing,
+reports cell/output/error counts, checks every known notebook classification,
+and rejects root notebooks not prefixed by `demo` or `example`. It does **not**
+execute notebook cells. / Команда рекурсивно проверяет JSON, считает ячейки,
+outputs и ошибки, проверяет классификацию и запрещает в корне notebooks без
+префикса `demo`/`example`. Ячейки при этом **не выполняются**.
