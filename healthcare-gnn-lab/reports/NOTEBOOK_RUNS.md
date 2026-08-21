@@ -2,16 +2,16 @@
 
 ## Scope / Объём проверки
 
-On 2026-08-21, the four numbered notebooks in `notebooks/` were executed from top
-to bottom on the local CPU environment. The `notebooks/legacy/` directory was
-intentionally excluded. Executed copies, including cell outputs and execution
+On 2026-08-21, smoke-enabled notebooks 01–04 in `notebooks/` were executed from
+top to bottom on the local CPU environment. Exploratory notebooks 05–07 were not
+part of that smoke run. Executed copies, including cell outputs and execution
 counts, are stored in [`notebook-runs/`](notebook-runs/). Detailed
 machine-readable results are stored in the four `*_smoke.json` files in this
 folder.
 
-21 августа 2026 года четыре нумерованных notebook из `notebooks/` были полностью
-выполнены в локальном CPU-окружении. Папка `notebooks/legacy/` намеренно
-исключена. Выполненные копии с outputs и execution counts находятся в
+21 августа 2026 года smoke-notebooks 01–04 из `notebooks/` были полностью
+выполнены в локальном CPU-окружении. Исследовательские notebooks 05–07 не входили
+в этот smoke-запуск. Выполненные копии с outputs и execution counts находятся в
 [`notebook-runs/`](notebook-runs/), а подробные машиночитаемые результаты — в
 четырёх файлах `*_smoke.json` этой папки.
 
@@ -76,8 +76,8 @@ PYTHONPATH=healthcare-gnn-lab/src \
   python healthcare-gnn-lab/scripts/run_notebooks.py
 ```
 
-The standard-library runner executes only `notebooks/*.ipynb`, fails on the first
+The standard-library runner executes its explicit 01–04 manifest, fails on the first
 cell error, writes executed copies to `reports/notebook-runs/`, and leaves source
 notebooks without generated outputs. / Runner на стандартной библиотеке выполняет
-только `notebooks/*.ipynb`, завершается при первой ошибке, сохраняет выполненные
+только notebooks 01–04 из явного списка, завершается при первой ошибке, сохраняет выполненные
 копии в `reports/notebook-runs/` и не добавляет outputs в исходные notebooks.

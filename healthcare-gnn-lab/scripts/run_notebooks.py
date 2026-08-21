@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Execute the four structured lab notebooks without optional Jupyter packages."""
+"""Execute the four smoke-enabled lab notebooks without Jupyter packages."""
 from __future__ import annotations
 
 import argparse
@@ -10,6 +10,13 @@ import json
 import os
 import traceback
 from pathlib import Path
+
+RUNNABLE_NOTEBOOKS = (
+    "01_patient_similarity_mi.ipynb",
+    "02_ptbxl_ecg_graph.ipynb",
+    "03_mimic_ehr_graph.ipynb",
+    "04_brain_hypergraph_optional.ipynb",
+)
 
 
 def execute_source(source: str, namespace: dict[str, object]) -> tuple[str, str | None]:
@@ -60,9 +67,10 @@ def main() -> None:
     parser.add_argument("--lab-dir", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
     lab_dir = args.lab_dir.resolve()
-    sources = sorted((lab_dir / "notebooks").glob("*.ipynb"))
-    if not sources:
-        raise SystemExit("No structured notebooks found")
+    sources = [lab_dir / "notebooks" / name for name in RUNNABLE_NOTEBOOKS]
+    missing = [str(source) for source in sources if not source.is_file()]
+    if missing:
+        raise SystemExit("Missing smoke notebook(s): " + ", ".join(missing))
     for source in sources:
         destination = lab_dir / "reports" / "notebook-runs" / source.name
         run_notebook(source, destination, lab_dir)

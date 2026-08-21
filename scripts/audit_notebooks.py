@@ -11,12 +11,12 @@ from pathlib import Path
 
 
 CLASSIFICATION = {
-    "agglomerative_clustering_medical_image.ipynb": "Clustering / medical imaging",
-    "genomic_population_gcn.ipynb": "Graph neural networks / genomics",
+    "07_vitiligo_image_clustering_exploratory.ipynb": "Clustering / medical imaging",
+    "05_genomic_population_gcn_exploratory.ipynb": "Graph neural networks / genomics",
     "Graph from DataFrame tSNE.ipynb": "Graph construction / dimensionality reduction",
     "Gromov-Waserstein graph clastering.ipynb": "Gromov-Wasserstein / clustering",
     "Gromov-Wasserstein distance Transport Task.ipynb": "Gromov-Wasserstein / optimal transport",
-    "hyperbolic_gnn_genomic_data.ipynb": "Hyperbolic learning / genomics",
+    "06_hyperbolic_tp53_sequences_exploratory.ipynb": "Hyperbolic learning / genomics",
     "Hyperbolic Graph Neural Network.ipynb": "Hyperbolic learning / GNN",
     "LLM Graph triplets visualisation.ipynb": "Knowledge graphs / LLM visualization",
     "ML task table PCA ICA tSNE DBSCAN AggClustering SVM.ipynb": "Classical ML / method survey",

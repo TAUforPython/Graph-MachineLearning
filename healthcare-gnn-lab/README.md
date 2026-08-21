@@ -205,43 +205,24 @@ non-clinical.
 находятся в `reports/notebook-runs/`, а рядом сохранены JSON-отчёты. Это не
 проверка в чистом Colab, а synthetic-результаты не имеют клинического значения.
 
-### Preserved legacy studies / Сохранённые legacy-исследования
+### Exploratory studies 05–07 / Исследовательские работы 05–07
 
-Three medical or genomic exploratory notebooks were moved from the repository
-root into `notebooks/legacy/`: vitiligo image clustering, genomic-population GCN
-classification, and a hyperbolic GNN for TP53 protein sequences. They preserve
-the original cell-oriented experiments and stored outputs for review; unlike the
-numbered notebooks, they do **not** yet implement the complete split, temporal,
-baseline, and reporting contract from `src/`. See the bilingual
-[`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md) before running or adapting
-them.
+The three reviewed medical/genomic experiments now follow the flat numbered
+structure in `notebooks/`; the obsolete `legacy/` directory has been removed.
 
-Три исследовательских notebook по медицинским изображениям и геномике перенесены
-из корня репозитория в `notebooks/legacy/`: кластеризация изображений витилиго,
-GCN-классификация геномных популяций и гиперболическая GNN для
-TP53-последовательностей. Исходные ячейки и сохранённые outputs оставлены для
-аудита, но эти notebooks пока **не** реализуют полный контракт из `src/` для
-split, времени, baseline и отчётности. Перед запуском или адаптацией прочитайте
-двуязычный [`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md).
+| Notebook | Cell workflow / Логика ячеек | Status / Статус |
+|---|---|---|
+| `05_genomic_population_gcn_exploratory.ipynb` | Genetic table → k-NN sample graph → PCA/t-SNE/network plots → PyG GCN width comparison. / Генетическая таблица → k-NN граф → визуализации → сравнение ширины PyG GCN. | Sensitive population-inference exploration; missing the complete lab split/leakage contract. / Исследовательская sensitive-задача без полного leakage-контракта. |
+| `06_hyperbolic_tp53_sequences_exploratory.ipynb` | TP53 sequence encoding → edit-distance graph → custom hyperbolic GNN → hierarchy loss, clustering, visualization, and Euclidean comparison. / Кодирование TP53 → edit-distance граф → custom hyperbolic GNN → clustering и сравнение. | Custom geometry and a stored error need independent validation; no clinical conclusion. / Custom-геометрия и сохранённая ошибка требуют проверки. |
+| `07_vitiligo_image_clustering_exploratory.ipynb` | Composite image download/slicing → image quantities and segmentation → KL-based agglomerative grading exploration. / Загрузка и разбиение изображения → признаки и сегментация → KL-based clustering. | Fixed image and Colab paths; not validated grading software. / Одно изображение и Colab-пути; не валидированная система. |
 
-### Preserved legacy studies / Сохранённые legacy-исследования
-
-Three medical or genomic exploratory notebooks were moved from the repository
-root into `notebooks/legacy/`: vitiligo image clustering, genomic-population GCN
-classification, and a hyperbolic GNN for TP53 protein sequences. They preserve
-the original cell-oriented experiments and stored outputs for review; unlike the
-numbered notebooks, they do **not** yet implement the complete split, temporal,
-baseline, and reporting contract from `src/`. See the bilingual
-[`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md) before running or adapting
-them.
-
-Три исследовательских notebook по медицинским изображениям и геномике перенесены
-из корня репозитория в `notebooks/legacy/`: кластеризация изображений витилиго,
-GCN-классификация геномных популяций и гиперболическая GNN для
-TP53-последовательностей. Исходные ячейки и сохранённые outputs оставлены для
-аудита, но эти notebooks пока **не** реализуют полный контракт из `src/` для
-split, времени, baseline и отчётности. Перед запуском или адаптацией прочитайте
-двуязычный [`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md).
+These notebooks preserve the original cell-oriented code and stored outputs.
+Unlike smoke-enabled notebooks 01–04, they are not executed by
+`scripts/run_notebooks.py` and do **not** yet implement the complete split,
+temporal, baseline, and reporting contract from `src/`. See the bilingual
+[`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md). / Эти notebooks сохраняют
+исходный код и outputs, не запускаются smoke-runner и пока не реализуют полный
+контракт лаборатории; подробности приведены в двуязычном анализе.
 
 ## Repository tree
 
@@ -249,8 +230,7 @@ split, времени, baseline и отчётности. Перед запуск
 healthcare-gnn-lab/
 ├── README.md, pyproject.toml, .gitignore
 ├── configs/                    # four smoke configs + reviewed full-data template
-├── notebooks/                  # four thin Colab entry points
-│   └── legacy/                 # isolated medical/genomic explorations
+├── notebooks/                  # 01–04 smoke entry points; 05–07 explorations
 ├── reports/.gitkeep            # generated JSON/CSV/plots are ignored
 ├── src/healthcare_gnn/
 │   ├── cli.py

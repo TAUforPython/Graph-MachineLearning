@@ -5,9 +5,9 @@ leakage-aware healthcare GNN laboratory. / Коллекция учебных п�
 исследовательских notebooks и структурированной лаборатории healthcare GNN с
 контролем утечек данных.
 
-> **Research notice / Важно:** stored outputs in legacy notebooks show prior
+> **Research notice / Важно:** stored outputs in exploratory notebooks show prior
 > experiments; they are not proof of a clean reproducible run or clinical
-> validity. / Сохранённые результаты legacy-notebooks не доказывают
+> validity. / Сохранённые результаты exploratory-notebooks не доказывают
 > воспроизводимость или клиническую применимость.
 
 ## Start here / С чего начать
@@ -34,8 +34,7 @@ with `example` or `demo`. / В корне намеренно оставлены 
 ├── research-notebooks/         # non-medical exploratory work / исследования
 ├── utilities/notebooks/        # ERD tools / утилиты ERD
 ├── healthcare-gnn-lab/
-│   ├── notebooks/              # thin structured task entry points
-│   │   └── legacy/             # preserved medical/genomic explorations
+│   ├── notebooks/              # numbered task entry points and explorations
 │   ├── src/healthcare_gnn/     # reusable implementation
 │   ├── configs/ and tests/
 │   └── README.md               # bilingual lab guide / руководство
@@ -58,14 +57,15 @@ with `example` or `demo`. / В корне намеренно оставлены 
 
 Medical and genomic notebooks now live under
 [`healthcare-gnn-lab/notebooks/`](healthcare-gnn-lab/notebooks/). The numbered
-notebooks are thin entry points into tested code in `src/`; preserved experiments
-are isolated in `notebooks/legacy/`. / Медицинские и геномные notebooks находятся
-в `healthcare-gnn-lab/notebooks/`: нумерованные notebooks используют тестируемый
-код из `src/`, а исходные эксперименты изолированы в `notebooks/legacy/`.
+notebooks `01`–`04` are thin entry points into tested code in `src/`; reviewed
+exploratory studies are numbered `05`–`07` in the same folder. / Медицинские и
+геномные notebooks находятся в `healthcare-gnn-lab/notebooks/`: notebooks
+`01`–`04` используют тестируемый код из `src/`, а исследовательские работы
+пронумерованы `05`–`07` в той же папке.
 
-The legacy genomic GCN, protein-sequence hyperbolic GNN, and vitiligo image
+The exploratory genomic GCN, protein-sequence hyperbolic GNN, and vitiligo image
 clustering notebooks are exploratory adaptations, **not** diagnostic tools. /
-Legacy-notebooks с genomic GCN, гиперболической GNN для белковых
+Exploratory-notebooks с genomic GCN, гиперболической GNN для белковых
 последовательностей и кластеризацией изображений витилиго являются
 исследовательскими примерами, **не** диагностическими средствами.
 
