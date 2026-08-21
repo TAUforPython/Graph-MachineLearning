@@ -194,7 +194,35 @@ Open the notebooks in Google Colab:
 | MIMIC EHR graph | [Open](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/healthcare-gnn-lab/notebooks/03_mimic_ehr_graph.ipynb) | Shared runner plus tested temporal/phenotype guards |
 | Optional brain hypergraph | [Open](https://colab.research.google.com/github/D2718281828nis/ML-MachineLearning-Graphs/blob/main/healthcare-gnn-lab/notebooks/04_brain_hypergraph_optional.ipynb) | Shared runner plus transparent tested incidence operator |
 
-A clean Colab run is not yet recorded. Each notebook states that limitation.
+A clean local CPU run of all four structured notebooks is recorded in
+[`reports/NOTEBOOK_RUNS.md`](reports/NOTEBOOK_RUNS.md), with executed notebook
+copies in `reports/notebook-runs/` and machine-readable JSON reports beside it.
+This is not a clean Colab verification and the synthetic results remain
+non-clinical.
+
+Локальный CPU-запуск всех четырёх структурированных notebooks записан в
+[`reports/NOTEBOOK_RUNS.md`](reports/NOTEBOOK_RUNS.md); выполненные копии
+находятся в `reports/notebook-runs/`, а рядом сохранены JSON-отчёты. Это не
+проверка в чистом Colab, а synthetic-результаты не имеют клинического значения.
+
+### Preserved legacy studies / Сохранённые legacy-исследования
+
+Three medical or genomic exploratory notebooks were moved from the repository
+root into `notebooks/legacy/`: vitiligo image clustering, genomic-population GCN
+classification, and a hyperbolic GNN for TP53 protein sequences. They preserve
+the original cell-oriented experiments and stored outputs for review; unlike the
+numbered notebooks, they do **not** yet implement the complete split, temporal,
+baseline, and reporting contract from `src/`. See the bilingual
+[`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md) before running or adapting
+them.
+
+Три исследовательских notebook по медицинским изображениям и геномике перенесены
+из корня репозитория в `notebooks/legacy/`: кластеризация изображений витилиго,
+GCN-классификация геномных популяций и гиперболическая GNN для
+TP53-последовательностей. Исходные ячейки и сохранённые outputs оставлены для
+аудита, но эти notebooks пока **не** реализуют полный контракт из `src/` для
+split, времени, baseline и отчётности. Перед запуском или адаптацией прочитайте
+двуязычный [`NOTEBOOK_ANALYSIS.md`](../docs/NOTEBOOK_ANALYSIS.md).
 
 ### Preserved legacy studies / Сохранённые legacy-исследования
 
